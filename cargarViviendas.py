@@ -16,12 +16,12 @@ fichero = filedialog.askopenfilename(title="Abrir", initialdir='D:', filetypes=(
 table_OG = dbf.Table(fichero, codepage=0xf0)
 table_OG.open()
 
-table_NEW = dbf.Table('c1_modificada.dbf', table_OG.structure(), codepage=0xf0)
-table_NEW.open(mode=dbf.READ_WRITE)
-
 print("Generando nueva tabla...")
-for dato in table_OG:
-    table_NEW.append(tuple(dato))
+
+shutil.copyfile(fichero, 'c1_modificada.dbf')
+
+table_NEW = dbf.Table('c1_modificada.dbf', codepage=0xf0)
+table_NEW.open(mode=dbf.READ_WRITE)
 
 table_OG.close()
 
